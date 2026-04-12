@@ -1,41 +1,54 @@
-import { useState } from "react";
-import logo from "@/assets/logo.png";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const isHome = location.pathname === "/";
 
   const links = [
-    { label: "À propos", href: "#about" },
-    { label: "Services", href: "#services" },
-    { label: "Contact", href: "#contact" },
+    { label: "Accueil", href: "/" },
+    { label: "À propos", href: "/a-propos" },
+    { label: "Services", href: "/services" },
+    { label: "Programme", href: "/programme" },
+    { label: "Contact", href: "/contact" },
   ];
 
+  const transparent = isHome && !scrolled;
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${transparent ? "bg-transparent border-transparent" : "bg-background/95 backdrop-blur-md border-b border-border shadow-sm"}`}>
       <div className="container mx-auto px-6 flex items-center justify-between h-16">
-        <a href="#" className="flex items-center gap-3 font-heading text-lg font-semibold uppercase tracking-wider text-foreground">
-          <img src={logo} alt="TBIB Logo" className="w-8 h-8 rounded-full" />
-          Denilson Monteiro
-        </a>
+        <Link to="/" className={`font-heading text-lg font-semibold uppercase tracking-wider transition-colors ${transparent ? "text-white" : "text-foreground"}`}>
+          PUP Form
+        </Link>
         <div className="hidden md:flex items-center gap-8">
           {links.map((l) => (
-            <a
+            <Link
               key={l.href}
-              href={l.href}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              to={l.href}
+              className={`text-sm transition-colors ${location.pathname === l.href ? (transparent ? "text-white font-medium" : "text-brand font-medium") : (transparent ? "text-white/80 hover:text-white" : "text-muted-foreground hover:text-foreground")}`}
             >
               {l.label}
-            </a>
+            </Link>
           ))}
-          <a
-            href="#contact"
-            className="bg-accent text-accent-foreground font-medium px-5 py-2 rounded-md text-sm hover:bg-accent/90 transition-colors"
+          <Link
+            to="/contact"
+            className="bg-brand text-white font-medium px-5 py-2 rounded-md text-sm hover:bg-brand/90 transition-colors"
           >
             Réserver
-          </a>
+          </Link>
         </div>
         <button
-          className="md:hidden text-foreground"
+          className={`md:hidden transition-colors ${transparent ? "text-white" : "text-foreground"}`}
           onClick={() => setOpen(!open)}
           aria-label="Menu"
         >
@@ -51,22 +64,22 @@ const Navbar = () => {
       {open && (
         <div className="md:hidden bg-background border-b border-border px-6 py-4 space-y-4">
           {links.map((l) => (
-            <a
+            <Link
               key={l.href}
-              href={l.href}
+              to={l.href}
               onClick={() => setOpen(false)}
-              className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className={`block text-sm transition-colors ${location.pathname === l.href ? "text-brand font-medium" : "text-muted-foreground hover:text-foreground"}`}
             >
               {l.label}
-            </a>
+            </Link>
           ))}
-          <a
-            href="#contact"
+          <Link
+            to="/contact"
             onClick={() => setOpen(false)}
-            className="block bg-accent text-accent-foreground font-medium px-5 py-2 rounded-md text-sm text-center hover:bg-accent/90 transition-colors"
+            className="block bg-brand text-white font-medium px-5 py-2 rounded-md text-sm text-center hover:bg-brand/90 transition-colors"
           >
             Réserver
-          </a>
+          </Link>
         </div>
       )}
     </nav>

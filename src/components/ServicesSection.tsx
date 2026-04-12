@@ -1,25 +1,32 @@
-import coaching5 from "@/assets/coaching-5.jpg";
-import coaching3 from "@/assets/coaching-3.jpg";
-import coaching6 from "@/assets/coaching-6.jpg";
+import { Dumbbell, Leaf, Brain } from "lucide-react";
+import heroImg from "@/assets/hero.png";
+import nutritionImg from "@/assets/nutrition.png";
+import coachMentaleImg from "@/assets/coach mentale.png";
 
 const services = [
   {
-    title: "En salle avec moi",
-    location: "Haute-Savoie",
-    description: "On bosse ensemble, en face à face. Je corrige, je pousse, je m'adapte en temps réel.",
-    image: coaching5,
+    title: "Coaching sportif",
+    location: "Personal training · Individuels et petits groupes",
+    description: "Juste l'activité physique qu'il faut. Ni trop, ni trop peu. Un programme conçu pour votre réalité de dirigeant, qui tient dans votre agenda et donne des résultats visibles.",
+    icon: Dumbbell,
+    accent: "bg-brand/8",
+    image: heroImg,
   },
   {
-    title: "Coaching à distance",
-    location: "Partout en France",
-    description: "Programme perso + suivi vidéo chaque semaine. Comme si j'étais là.",
-    image: coaching3,
+    title: "Coaching bien-être et nutrition",
+    location: "Routine · Alimentation · Récupération",
+    description: "Cuisiner sain ET bon dans un temps court. Une routine hebdomadaire positive avec des outils novateurs pour optimiser votre temps et votre énergie.",
+    icon: Leaf,
+    accent: "bg-brand/5",
+    image: nutritionImg,
   },
   {
-    title: "Nutrition sur-mesure",
-    location: "Inclus dans chaque formule",
-    description: "Un plan simple qui colle à ta vie et tes objectifs.",
-    image: coaching6,
+    title: "Coaching mental",
+    location: "Mindset · Décision · Dépolarisation©",
+    description: "Mieux réfléchir, décider avec clarté, retrouver votre joie de vivre. La Dépolarisation© agit là où le coaching classique ne suffit pas.",
+    icon: Brain,
+    accent: "bg-brand/5",
+    image: coachMentaleImg,
   },
 ];
 
@@ -32,27 +39,29 @@ const ServicesSection = () => {
             Comment on travaille ensemble
           </h2>
           <p className="text-muted-foreground text-lg max-w-lg">
-            Trois façons de bosser. Un seul objectif.
+            Trois piliers. Un seul résultat : vous retrouver.
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
-          {services.map((service, i) => (
-            <div key={i} className="group">
-              <div className="h-60 overflow-hidden rounded-lg">
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                />
+          {services.map((service, i) => {
+            const Icon = service.icon;
+            return (
+              <div key={i} className="group">
+                <div className={`h-60 rounded-xl overflow-hidden flex items-center justify-center ${service.accent}`}>
+                  {service.image ? (
+                    <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
+                  ) : (
+                    <Icon className="w-20 h-20 text-brand/40" strokeWidth={0.9} />
+                  )}
+                </div>
+                <div className="pt-6">
+                  <h3 className="font-heading text-xl font-bold mb-1">{service.title}</h3>
+                  <p className="text-muted-foreground text-sm mb-3">{service.location}</p>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{service.description}</p>
+                </div>
               </div>
-              <div className="pt-6">
-                <h3 className="font-heading text-xl font-bold mb-1">{service.title}</h3>
-                <p className="text-muted-foreground text-sm mb-3">{service.location}</p>
-                <p className="text-muted-foreground text-sm leading-relaxed">{service.description}</p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

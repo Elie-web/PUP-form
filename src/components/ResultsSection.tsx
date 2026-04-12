@@ -1,65 +1,40 @@
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-} from "@/components/ui/carousel";
-
-const images = [
-  "/results/result-1.png",
-  "/results/result-2.png",
-  "/results/result-3.png",
-  "/results/result-4.png",
-  "/results/result-5.png",
-  "/results/result-6.png",
-  "/results/result-7.png",
-];
-
 const ResultsSection = () => {
   return (
-    <section className="py-40">
+    <section className="py-32 bg-foreground text-background">
       <div className="container mx-auto px-6">
-        <div className="mb-16 max-w-2xl">
-          <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">
-            90 jours. C'est tout ce qu'il te faut.
-          </h2>
-          <p className="text-muted-foreground text-lg">
-            Une méthode simple, structurée et adaptée à ta vie.
-          </p>
-        </div>
+        <div className="grid md:grid-cols-2 gap-16 items-center">
 
-        <div className="relative px-12">
-          <Carousel opts={{ align: "start", loop: true }} className="w-full">
-            <CarouselContent className="-ml-4">
-              {images.map((src, i) => (
-                <CarouselItem key={i} className="pl-4 basis-full md:basis-1/2 lg:basis-1/3">
-                  <img
-                    src={src}
-                    alt="Transformation"
-                    loading="lazy"
-                    className="w-full h-[500px] object-cover rounded-lg"
-                  />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="border-foreground/20 text-foreground hover:bg-secondary" />
-            <CarouselNext className="border-foreground/20 text-foreground hover:bg-secondary" />
-          </Carousel>
-        </div>
+          {/* Quote */}
+          <div>
+            <p className="text-background/40 text-6xl font-heading font-bold leading-none mb-6">"</p>
+            <p className="text-background text-2xl md:text-3xl font-heading font-bold leading-snug mb-8">
+              Profiter le mieux et le plus longtemps possible de ses proches : c'est la seule chose qui vaut VRAIMENT le coup.
+            </p>
+            <p className="text-background/50 text-sm mb-10">Emily et Antoine, fondateurs PUP Form</p>
+            <a
+              href="#contact"
+              className="inline-block bg-brand text-white font-medium px-8 py-4 rounded-xl text-base hover:bg-brand/90 transition-colors"
+            >
+              Je veux le même résultat
+            </a>
+          </div>
 
-        <div className="mt-16 text-center">
-          <p className="text-muted-foreground text-lg italic mb-8">
-            "Le corps que tu construis aujourd'hui, c'est ta liberté de demain."
-          </p>
-          <a
-            href="https://www.instagram.com/thebodyisblack/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-foreground text-background font-medium px-8 py-4 rounded-md text-base hover:bg-foreground/90 transition-colors"
-          >
-            Je veux le même résultat
-          </a>
+          {/* Stats grid */}
+          <div className="grid grid-cols-2 gap-4">
+            {[
+              { number: "30 000+", label: "Séances réalisées", sub: "en 12 ans" },
+              { number: "2 000+", label: "Membres accompagnés", sub: "depuis la création" },
+              { number: "15 ans", label: "Expérience cumulée", sub: "Emily et Antoine" },
+              { number: "5.0 / 5", label: "Note Google", sub: "53 avis vérifiés" },
+            ].map((stat, i) => (
+              <div key={i} className="bg-background/8 border border-background/15 rounded-2xl p-7">
+                <p className="font-heading text-3xl font-bold text-brand mb-2">{stat.number}</p>
+                <p className="font-semibold text-background text-sm mb-1">{stat.label}</p>
+                <p className="text-background/40 text-xs">{stat.sub}</p>
+              </div>
+            ))}
+          </div>
+
         </div>
       </div>
     </section>
