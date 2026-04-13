@@ -41,7 +41,7 @@ const services = [
     title: "Accompagnement nutritionnel",
     subtitle: "Nutrition · Hygiène de vie · Énergie",
     description:
-      "La nutrition fait partie intégrante de chaque parcours. Antoine vous guide vers une alimentation adaptée à votre vie de dirigeante — simple, efficace, sans frustration.",
+      "La nutrition fait partie intégrante de chaque parcours. Antoine vous guide vers une alimentation adaptée à votre vie de dirigeante : simple, efficace, sans frustration.",
     details: [
       "Bilan alimentaire personnalisé",
       "Plan nutritionnel adapté à votre rythme",

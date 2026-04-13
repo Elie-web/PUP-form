@@ -10,7 +10,7 @@ const phases = [
     title: "On se parle vraiment",
     duration: "Semaine 1",
     description:
-      "On échange sur ta vie, ta fatigue, tes frustrations et surtout ce qui compte pour toi. Pas un questionnaire à remplir — un vrai échange humain.",
+      "On échange sur ta vie, ta fatigue, tes frustrations et surtout ce qui compte pour toi. Pas un questionnaire à remplir : un vrai échange humain.",
   },
   {
     number: "02",
@@ -117,7 +117,7 @@ const Programme = () => {
                 {[
                   "Tes proches méritent la meilleure version de toi",
                   "Tu veux bouger mais tu ne sais pas par où commencer",
-                  "Tu as déjà essayé des régimes — rien n'a tenu dans la durée",
+                  "Tu as déjà essayé des régimes, rien n'a tenu dans la durée",
                   "Tu cherches quelque chose de réaliste, pas un programme générique",
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-4">
@@ -220,7 +220,7 @@ const Programme = () => {
                   <Star key={i} className="w-3.5 h-3.5 fill-brand text-brand" />
                 ))}
               </div>
-              <span className="text-sm">5.0 — 53 avis Google</span>
+              <span className="text-sm">5.0 · 53 avis Google</span>
             </div>
           </div>
         </div>

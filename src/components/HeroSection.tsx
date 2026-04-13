@@ -26,7 +26,7 @@ const HeroSection = () => {
             Joie de vivre.
           </h1>
           <p className="text-lg text-white/70 mb-10 animate-fade-up" style={{ animationDelay: "0.1s" }}>
-            La Dépolarisation© — une transformation durable en 20h.
+            La Dépolarisation© : une transformation durable en 20h.
           </p>
           <div className="flex items-center justify-center gap-1 mb-8 animate-fade-up" style={{ animationDelay: "0.2s" }}>
             {[...Array(5)].map((_, i) => (

@@ -63,7 +63,7 @@ const APropos = () => {
                 Notre entourage pro et perso nous demandait d'être présents à 100 %, partout à la fois. On connaît cette sensation d'être à vide alors qu'on voudrait tellement donner plus.
               </p>
               <p className="text-muted-foreground text-base leading-relaxed mb-10">
-                Après <strong>12 ans d'expérience professionnelle</strong> et <strong>5 ans de parentalité</strong>, on a choisi de transformer les parents et les couples trop fatigués grâce à des parcours ultra-personnalisés. Parce que profiter le mieux et le plus longtemps possible de ses proches — c'est la seule chose qui vaut VRAIMENT le coup.
+                Après <strong>12 ans d'expérience professionnelle</strong> et <strong>5 ans de parentalité</strong>, on a choisi de transformer les parents et les couples trop fatigués grâce à des parcours ultra-personnalisés. Parce que profiter le mieux et le plus longtemps possible de ses proches, c'est la seule chose qui vaut VRAIMENT le coup.
               </p>
               <div className="flex flex-wrap gap-3">
                 {["12 ans d'expérience", "5 ans de parentalité", "30 000+ séances", "2 000+ membres"].map((tag) => (
@@ -91,7 +91,7 @@ const APropos = () => {
                 Sa spécialité : construire avec toi une <strong>routine hebdomadaire positive</strong> avec des outils novateurs pour optimiser ton temps. Faire juste l'activité physique qu'il faut. Te rendre plus performant au quotidien sans t'épuiser.
               </p>
               <p className="text-muted-foreground text-base leading-relaxed">
-                Parce que tu es précieux(se) — et que tes proches méritent la meilleure version de toi.
+                Parce que tu es précieux(se), et que tes proches méritent la meilleure version de toi.
               </p>
             </div>
             <div className="rounded-lg overflow-hidden">
@@ -135,7 +135,7 @@ const APropos = () => {
               <p className="text-brand text-sm font-medium uppercase tracking-widest mb-4">La spécialiste bien-être</p>
               <h2 className="font-heading text-4xl md:text-5xl font-bold mb-8">Emily</h2>
               <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-                Co-fondatrice de PUP Form, Emily prend en charge la dimension bien-être, récupération et nutrition. Elle sait cuisiner <strong>sain ET bon dans un temps court</strong> — et elle va t'apprendre à faire pareil.
+                Co-fondatrice de PUP Form, Emily prend en charge la dimension bien-être, récupération et nutrition. Elle sait cuisiner <strong>sain ET bon dans un temps court</strong> et elle va t'apprendre à faire pareil.
               </p>
               <p className="text-muted-foreground text-base leading-relaxed mb-6">
                 Ses soins corporels spécifiques et ses massages complètent le travail d'Antoine pour une approche vraiment complète. Le repos et la récupération, c'est aussi de la performance.
@@ -163,7 +163,7 @@ const APropos = () => {
             {[
               {
                 title: "La famille d'abord",
-                desc: "Profiter le mieux et le plus longtemps possible de ses proches — c'est la seule chose qui vaut VRAIMENT le coup. Tout notre travail part de là.",
+                desc: "Profiter le mieux et le plus longtemps possible de ses proches : c'est la seule chose qui vaut VRAIMENT le coup. Tout notre travail part de là.",
               },
               {
                 title: "Ultra-personnalisé",
