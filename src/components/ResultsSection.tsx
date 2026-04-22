@@ -1,41 +1,48 @@
 const ResultsSection = () => {
   return (
-    <section className="py-32 bg-foreground text-background">
+    <section className="py-32 bg-foreground text-background overflow-hidden">
       <div className="container mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
 
-          {/* Quote */}
-          <div>
-            <p className="text-background/40 text-6xl font-heading font-bold leading-none mb-6">"</p>
-            <p className="text-background text-2xl md:text-3xl font-heading font-bold leading-snug mb-8">
-              Profiter le mieux et le plus longtemps possible de ses proches : c'est la seule chose qui vaut VRAIMENT le coup.
-            </p>
-            <p className="text-background/50 text-sm mb-10">Emily et Antoine, fondateurs PUP Form</p>
-            <a
-              href="#contact"
-              className="inline-block bg-brand text-white font-medium px-8 py-4 rounded-xl text-base hover:bg-brand/90 transition-colors"
-            >
-              Je veux le même résultat
-            </a>
-          </div>
+        {/* Section tag */}
+        <p className="text-brand text-sm font-medium uppercase tracking-widest mb-16 text-center">
+          Les résultats parlent
+        </p>
 
-          {/* Stats grid */}
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              { number: "30 000+", label: "Séances réalisées", sub: "en 12 ans" },
-              { number: "2 000+", label: "Membres accompagnés", sub: "depuis la création" },
-              { number: "15 ans", label: "Expérience cumulée", sub: "Emily et Antoine" },
-              { number: "5.0 / 5", label: "Note Google", sub: "53 avis vérifiés" },
-            ].map((stat, i) => (
-              <div key={i} className="bg-background/8 border border-background/15 rounded-2xl p-7">
-                <p className="font-heading text-3xl font-bold text-brand mb-2">{stat.number}</p>
-                <p className="font-semibold text-background text-sm mb-1">{stat.label}</p>
-                <p className="text-background/40 text-xs">{stat.sub}</p>
-              </div>
-            ))}
-          </div>
-
+        {/* Stats row — clean, no decorative overlap */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-24">
+          {[
+            { number: "30 000+", label: "Séances réalisées", sub: "en 15 ans" },
+            { number: "2 000+", label: "Parents accompagnés", sub: "depuis la création" },
+            { number: "12 ans", label: "Expérience professionnelle", sub: "Emily & Antoine" },
+            { number: "5.0 / 5", label: "Note Google", sub: "53 avis vérifiés" },
+          ].map((stat, i) => (
+            <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-8 text-center">
+              <p className="font-heading text-4xl md:text-5xl font-bold text-brand mb-3 leading-none">
+                {stat.number}
+              </p>
+              <p className="font-semibold text-background text-sm mb-1">{stat.label}</p>
+              <p className="text-background/40 text-xs">{stat.sub}</p>
+            </div>
+          ))}
         </div>
+
+        {/* Quote block — separate area, no overlap */}
+        <div className="max-w-3xl mx-auto text-center">
+          <div className="w-16 h-1 bg-brand mx-auto mb-10 rounded-full" />
+          <p className="text-background text-2xl md:text-4xl font-heading font-bold leading-snug mb-6">
+            "Profiter le mieux et le plus longtemps possible de ses proches — c'est la seule chose qui vaut VRAIMENT le coup."
+          </p>
+          <p className="text-background/40 text-sm mb-12">
+            Emily & Antoine · Fondateurs PUP Form · Parents d'une petite fille de 5 ans
+          </p>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 bg-brand text-white font-semibold px-8 py-4 rounded-xl text-base hover:bg-brand/90 transition-all hover:scale-105 shadow-lg shadow-brand/30"
+          >
+            Je veux retrouver cet élan
+          </a>
+        </div>
+
       </div>
     </section>
   );

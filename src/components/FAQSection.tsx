@@ -46,26 +46,26 @@ const FAQSection = () => {
               Poser ma question
             </a>
           </div>
-          <div className="space-y-3">
+          <div className="space-y-4">
             {faqs.map((faq, i) => (
               <div
                 key={i}
-                className={`rounded-xl border border-border overflow-hidden transition-colors ${openIndex === i ? "bg-secondary" : "bg-background hover:bg-secondary/60"}`}
+                className={`rounded-2xl border border-border overflow-hidden transition-colors ${openIndex === i ? "bg-secondary" : "bg-background hover:bg-secondary/60"}`}
               >
                 <button
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                  className="w-full text-left px-6 py-5 flex items-center justify-between gap-4"
+                  className="w-full text-left px-7 py-6 flex items-center justify-between gap-4"
                 >
-                  <span className="text-foreground font-medium text-sm">{faq.q}</span>
-                  <div className="w-7 h-7 rounded-full bg-brand/10 flex items-center justify-center shrink-0">
+                  <span className="text-foreground font-medium text-base">{faq.q}</span>
+                  <div className="w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center shrink-0">
                     {openIndex === i
-                      ? <Minus className="w-3.5 h-3.5 text-brand" />
-                      : <Plus className="w-3.5 h-3.5 text-brand" />
+                      ? <Minus className="w-4 h-4 text-brand" />
+                      : <Plus className="w-4 h-4 text-brand" />
                     }
                   </div>
                 </button>
                 {openIndex === i && (
-                  <div className="px-6 pb-5">
+                  <div className="px-7 pb-6">
                     <p className="text-muted-foreground text-sm leading-relaxed">{faq.a}</p>
                   </div>
                 )}

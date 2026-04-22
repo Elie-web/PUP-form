@@ -49,7 +49,7 @@ const testimonials = [
     role: "Avis Google",
   },
   {
-    text: "Je n'étais pas une grande sportive. Sébastien m'a accompagnée avec patience et bienveillance. Aujourd'hui je suis fière de mes résultats et de l'énergie retrouvée.",
+    text: "Je n'étais pas une grande sportive. J'ai été accompagnée avec patience et bienveillance. Aujourd'hui je suis fière de mes résultats et de l'énergie retrouvée.",
     name: "Cliente PUP Form",
     role: "Avis StarOfService",
   },
@@ -142,14 +142,14 @@ const Programme = () => {
           </div>
           <div className="max-w-3xl mx-auto space-y-0">
             {phases.map((phase, i) => (
-              <div key={i} className="flex gap-8 py-10 border-b border-border last:border-0">
-                <div className="shrink-0">
-                  <span className="font-heading text-4xl font-bold text-brand/20">{phase.number}</span>
+              <div key={i} className="flex gap-10 py-12 border-b border-border last:border-0 group">
+                <div className="shrink-0 w-16 text-right">
+                  <span className="font-heading text-5xl font-bold text-brand leading-none">{phase.number}</span>
                 </div>
-                <div>
-                  <div className="flex items-center gap-4 mb-3">
-                    <h3 className="font-heading text-xl font-bold">{phase.title}</h3>
-                    <span className="text-xs text-muted-foreground bg-secondary px-3 py-1 rounded-full">{phase.duration}</span>
+                <div className="flex-1">
+                  <div className="flex flex-wrap items-center gap-4 mb-4">
+                    <h3 className="font-heading text-2xl font-bold">{phase.title}</h3>
+                    <span className="text-xs text-brand bg-brand/10 font-medium px-3 py-1 rounded-full">{phase.duration}</span>
                   </div>
                   <p className="text-muted-foreground text-base leading-relaxed">{phase.description}</p>
                 </div>

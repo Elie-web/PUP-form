@@ -1,4 +1,4 @@
-import { Dumbbell, Leaf, Brain } from "lucide-react";
+import { Dumbbell, Leaf, Brain, ArrowRight } from "lucide-react";
 import heroImg from "@/assets/hero.png";
 import nutritionImg from "@/assets/nutrition.png";
 import coachMentaleImg from "@/assets/coach mentale.png";
@@ -6,63 +6,91 @@ import coachMentaleImg from "@/assets/coach mentale.png";
 const services = [
   {
     title: "Coaching sportif",
-    location: "Personal training · Individuels et petits groupes",
-    description: "Juste l'activité physique qu'il faut. Ni trop, ni trop peu. Un programme conçu pour votre réalité de dirigeant, qui tient dans votre agenda et donne des résultats visibles.",
+    sub: "Personal training · Individuels et petits groupes",
+    description: "Juste l'activité physique qu'il faut. Ni trop, ni trop peu. Un programme conçu pour votre réalité de parent, qui tient dans votre agenda et donne des résultats visibles dès les premières semaines.",
     icon: Dumbbell,
-    accent: "bg-brand/8",
     image: heroImg,
+    stat: { n: "30 000+", l: "séances réalisées" },
   },
   {
-    title: "Coaching bien-être et nutrition",
-    location: "Routine · Alimentation · Récupération",
-    description: "Cuisiner sain ET bon dans un temps court. Une routine hebdomadaire positive avec des outils novateurs pour optimiser votre temps et votre énergie.",
+    title: "Bien-être & nutrition",
+    sub: "Routine · Alimentation · Récupération",
+    description: "Cuisiner sain ET bon dans un temps court. Une routine hebdomadaire simple avec des outils concrets pour optimiser votre énergie — sans tout bouleverser.",
     icon: Leaf,
-    accent: "bg-brand/5",
     image: nutritionImg,
+    stat: { n: "100%", l: "sur mesure" },
   },
   {
     title: "Coaching mental",
-    location: "Mindset · Décision · Dépolarisation©",
-    description: "Mieux réfléchir, décider avec clarté, retrouver votre joie de vivre. La Dépolarisation© agit là où le coaching classique ne suffit pas.",
+    sub: "Mindset · Confiance · Développement personnel",
+    description: "Retrouver la clarté, regagner confiance en soi, sortir des schémas qui épuisent. Un accompagnement en profondeur pour les parents qui veulent se retrouver.",
     icon: Brain,
-    accent: "bg-brand/5",
     image: coachMentaleImg,
+    stat: { n: "15 ans", l: "d'expérience" },
   },
 ];
 
 const ServicesSection = () => {
   return (
-    <section id="services" className="py-40 bg-secondary">
+    <section id="services" className="py-32 bg-secondary overflow-hidden">
       <div className="container mx-auto px-6">
-        <div className="mb-20">
-          <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">
-            Comment on travaille ensemble
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-lg">
-            Trois piliers. Un seul résultat : vous retrouver.
-          </p>
+
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end gap-6 mb-16">
+          <div className="flex-1">
+            <p className="text-brand text-sm font-medium uppercase tracking-widest mb-3">Les trois piliers</p>
+            <h2 className="font-heading text-4xl md:text-5xl font-bold leading-tight">
+              Corps, nutrition, mental.
+              <br />
+              <span className="text-muted-foreground/50">Un seul résultat : vous retrouver.</span>
+            </h2>
+          </div>
+          <a
+            href="#contact"
+            className="shrink-0 inline-flex items-center gap-2 text-sm font-medium text-brand hover:underline"
+          >
+            Voir le programme complet <ArrowRight className="w-4 h-4" />
+          </a>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
+
+        {/* Service cards */}
+        <div className="grid md:grid-cols-3 gap-6">
           {services.map((service, i) => {
             const Icon = service.icon;
             return (
-              <div key={i} className="group">
-                <div className={`h-60 rounded-xl overflow-hidden flex items-center justify-center ${service.accent}`}>
-                  {service.image ? (
-                    <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
-                  ) : (
-                    <Icon className="w-20 h-20 text-brand/40" strokeWidth={0.9} />
-                  )}
+              <div key={i} className="group bg-background rounded-2xl overflow-hidden border border-border hover:border-brand/30 transition-all hover:shadow-lg">
+                {/* Image with overlay */}
+                <div className="relative h-56 overflow-hidden">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  {/* Stat badge bottom-left */}
+                  <div className="absolute bottom-4 left-4">
+                    <div className="bg-white/15 backdrop-blur-sm border border-white/20 rounded-xl px-3 py-2">
+                      <p className="font-heading text-lg font-bold text-white leading-none">{service.stat.n}</p>
+                      <p className="text-white/70 text-xs mt-0.5">{service.stat.l}</p>
+                    </div>
+                  </div>
+                  {/* Icon top-right */}
+                  <div className="absolute top-4 right-4 w-10 h-10 bg-brand rounded-xl flex items-center justify-center">
+                    <Icon className="w-5 h-5 text-white" strokeWidth={1.5} />
+                  </div>
                 </div>
-                <div className="pt-6">
+
+                {/* Content */}
+                <div className="p-7">
                   <h3 className="font-heading text-xl font-bold mb-1">{service.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-3">{service.location}</p>
+                  <p className="text-brand text-xs font-medium uppercase tracking-wider mb-3">{service.sub}</p>
                   <p className="text-muted-foreground text-sm leading-relaxed">{service.description}</p>
                 </div>
               </div>
             );
           })}
         </div>
+
       </div>
     </section>
   );

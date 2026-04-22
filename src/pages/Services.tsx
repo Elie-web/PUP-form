@@ -2,30 +2,34 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
 import { Brain, Dumbbell, Leaf, Apple } from "lucide-react";
+import heroImg from "@/assets/hero.png";
+import nutritionImg from "@/assets/nutrition.png";
+import coachMentaleImg from "@/assets/coach mentale.png";
+import pupProfile from "@/assets/pup form profile.jpg";
 
 const services = [
   {
     icon: Brain,
-    title: "Coaching mental & émotionnel",
-    subtitle: "Dépolarisation · Mindset · Confiance en soi",
+    title: "Coaching mental & développement personnel",
+    subtitle: "Mindset · Confiance en soi · Identité",
     description:
-      "Au cœur de la méthode PUP Form. Antoine utilise la dépolarisation et les outils de la haute performance pour libérer la charge mentale, dissoudre les blocages émotionnels profonds et restaurer une confiance puissante en vous.",
+      "Antoine est spécialisé en coaching identité et développement personnel. Il utilise des outils de haute performance pour libérer la charge mentale, dissoudre les blocages émotionnels et restaurer une vraie confiance en vous.",
     details: [
-      "Séances de dépolarisation individuelles",
+      "Séances de coaching individuel",
       "Travail sur l'image de soi et l'identité",
       "Déblocage des freins psychologiques",
-      "Impact sur vie pro, perso et intime",
       "Outils de gestion du stress et des angoisses",
+      "Impact durable sur vie pro, perso et familiale",
     ],
     tag: "Spécialité signature",
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
+    image: coachMentaleImg,
   },
   {
     icon: Dumbbell,
     title: "Personal Training & Fitness",
     subtitle: "Studio · Séances individuelles & petits groupes",
     description:
-      "Un programme physique conçu sur mesure, adapté à votre niveau, votre emploi du temps et vos objectifs. En séance individuelle ou en petit groupe, vous progressez avec méthode et plaisir.",
+      "Un programme physique conçu sur mesure, adapté à votre niveau, votre emploi du temps et vos objectifs de parent. Vous progressez avec méthode, sans vous épuiser — en séance individuelle ou en petit groupe.",
     details: [
       "Bilan physique initial complet",
       "Programme de renforcement musculaire",
@@ -33,15 +37,15 @@ const services = [
       "Suivi des performances et progression",
       "Petits groupes motivants (max 4 personnes)",
     ],
-    tag: "Studio à St-Martin-d'Hères",
-    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80",
+    tag: "Studio à Saint-Martin-d'Hères",
+    image: heroImg,
   },
   {
     icon: Apple,
     title: "Accompagnement nutritionnel",
     subtitle: "Nutrition · Hygiène de vie · Énergie",
     description:
-      "La nutrition fait partie intégrante de chaque parcours. Antoine vous guide vers une alimentation adaptée à votre vie de dirigeante : simple, efficace, sans frustration.",
+      "La nutrition fait partie intégrante de chaque parcours. Emily vous guide vers une alimentation adaptée à votre vie de parent : simple, efficace, sans frustration. Cuisiner sain ET bon dans un temps court.",
     details: [
       "Bilan alimentaire personnalisé",
       "Plan nutritionnel adapté à votre rythme",
@@ -49,24 +53,24 @@ const services = [
       "Optimisation de l'énergie au quotidien",
       "Suivi et ajustements réguliers",
     ],
-    tag: "Inclus dans chaque forfait",
-    image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=800&q=80",
+    tag: "Avec Emily",
+    image: nutritionImg,
   },
   {
     icon: Leaf,
-    title: "Récupération & Bien-être",
-    subtitle: "Avec Emily · Soins corporels · Massages",
+    title: "Bien-être & Récupération",
+    subtitle: "Avec Emily · Routine · Récupération active",
     description:
-      "Notre collaboratrice Emily prend en charge votre régénération avec des soins corporels spécifiques et des massages thérapeutiques. Le repos actif est une composante essentielle de la performance.",
+      "Emily prend en charge votre récupération et bien-être global. Le repos actif est une composante essentielle de la performance — apprendre à récupérer, c'est aussi progresser.",
     details: [
-      "Massages de récupération sportive",
-      "Soins corporels spécifiques",
-      "Séances de détente et décompression",
-      "Accompagnement du sommeil",
+      "Accompagnement de la récupération physique",
+      "Routine bien-être hebdomadaire",
+      "Gestion du sommeil et de la fatigue",
       "Rituel bien-être personnalisé",
+      "Approche douce et bienveillante",
     ],
     tag: "Avec Emily",
-    image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80",
+    image: pupProfile,
   },
 ];
 
@@ -79,7 +83,7 @@ const Services = () => {
       <section className="relative min-h-[60vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1600&q=80"
+            src={heroImg}
             alt="Services PUP Form"
             className="w-full h-full object-cover"
           />
@@ -89,10 +93,10 @@ const Services = () => {
         <div className="relative z-10 container mx-auto px-6 pt-32 pb-20 text-center">
           <p className="text-white/60 text-sm font-medium uppercase tracking-widest mb-5">Ce que nous proposons</p>
           <h1 className="font-heading text-5xl md:text-7xl font-bold leading-[0.95] mb-6 text-white">
-            Fait pour ta vie
+            Fait pour votre vie
           </h1>
           <p className="text-white/75 text-xl max-w-2xl mx-auto">
-            Une routine réaliste, des outils novateurs, un accompagnement humain.
+            Une routine réaliste, des outils concrets, un accompagnement humain.
           </p>
         </div>
       </section>
@@ -105,7 +109,7 @@ const Services = () => {
               const Icon = service.icon;
               const reverse = i % 2 !== 0;
               return (
-                <div key={i} className={`py-20 border-b border-border`}>
+                <div key={i} className="py-20 border-b border-border">
                   <div className={`grid md:grid-cols-2 gap-16 items-center ${reverse ? "md:[&>*:first-child]:order-2" : ""}`}>
                     <div>
                       <div className="flex items-center gap-3 mb-6">
@@ -127,7 +131,7 @@ const Services = () => {
                       </ul>
                       <Link
                         to="/contact"
-                        className="inline-block bg-brand text-white font-medium px-8 py-3 rounded-md text-sm hover:bg-brand/90 transition-colors"
+                        className="inline-block bg-brand text-white font-medium px-8 py-3.5 rounded-xl text-sm hover:bg-brand/90 transition-colors"
                       >
                         En savoir plus
                       </Link>
@@ -155,11 +159,11 @@ const Services = () => {
             Par où commencer ?
           </h2>
           <p className="text-background/70 text-lg mb-10 max-w-xl mx-auto">
-            Un entretien de 30 minutes pour échanger sur ta situation. On te guidera vers l’accompagnement le plus adapté.
+            Un entretien de 30 minutes pour échanger sur votre situation. On vous guidera vers l'accompagnement le plus adapté.
           </p>
           <Link
             to="/contact"
-            className="inline-block bg-brand text-white font-medium px-10 py-4 rounded-md text-lg hover:bg-brand/90 transition-colors"
+            className="inline-block bg-brand text-white font-medium px-10 py-4 rounded-xl text-lg hover:bg-brand/90 transition-colors"
           >
             Réserver mon entretien découverte
           </Link>
