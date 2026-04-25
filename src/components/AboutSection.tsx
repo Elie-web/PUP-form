@@ -1,5 +1,8 @@
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import coachingImage from "@/assets/pup form profile.jpg";
 import { Target, Zap, Heart, Award } from "lucide-react";
+import { fadeUp, slideLeft, slideRight, staggerFast } from "@/lib/motionVariants";
 
 const roles = [
   {
@@ -20,27 +23,39 @@ const roles = [
 ];
 
 const AboutSection = () => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.15 });
+
+  const rolesRef = useRef(null);
+  const rolesInView = useInView(rolesRef, { once: true, amount: 0.1 });
+
   return (
-    <section id="about" className="py-32 overflow-hidden">
+    <section id="about" className="py-32 overflow-hidden" ref={ref}>
       <div className="container mx-auto px-6">
 
         {/* Section tag */}
-        <p className="text-brand text-sm font-medium uppercase tracking-widest mb-16 text-center">Qui sommes-nous</p>
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="text-brand text-sm font-medium uppercase tracking-widest mb-16 text-center"
+        >
+          Qui sommes-nous
+        </motion.p>
 
         <div className="grid md:grid-cols-2 gap-16 items-start">
 
           {/* Photo column */}
-          <div className="relative">
+          <motion.div
+            className="relative"
+            variants={slideLeft}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+          >
             {/* Decorative background block */}
-            <div
-              className="absolute -top-6 -left-6 w-full h-full rounded-3xl bg-brand/10"
-              style={{ zIndex: 0 }}
-            />
+            <div className="absolute -top-6 -left-6 w-full h-full rounded-3xl bg-brand/10" style={{ zIndex: 0 }} />
             {/* Large background text */}
-            <div
-              className="absolute -bottom-4 -right-4 font-heading text-[120px] font-bold leading-none text-brand/5 select-none pointer-events-none"
-              style={{ zIndex: 0 }}
-            >
+            <div className="absolute -bottom-4 -right-4 font-heading text-[120px] font-bold leading-none text-brand/5 select-none pointer-events-none" style={{ zIndex: 0 }}>
               PUP
             </div>
 
@@ -54,7 +69,6 @@ const AboutSection = () => {
                 loading="lazy"
                 className="w-full h-[580px] object-cover"
               />
-              {/* Gradient overlay bottom */}
               <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/70 to-transparent" />
               <div className="absolute bottom-0 inset-x-0 p-6">
                 <p className="text-white font-heading text-xl font-bold">Emily & Antoine</p>
@@ -74,10 +88,15 @@ const AboutSection = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Text column */}
-          <div className="pt-4">
+          <motion.div
+            className="pt-4"
+            variants={slideRight}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+          >
             <h2 className="font-heading text-4xl md:text-5xl font-bold mb-6 leading-tight">
               Emily & Antoine,<br />
               <span className="text-brand">parents avant tout.</span>
@@ -90,24 +109,39 @@ const AboutSection = () => {
             </p>
 
             {/* Mini stats row */}
-            <div className="grid grid-cols-3 gap-4 mb-10">
+            <motion.div
+              className="grid grid-cols-3 gap-4 mb-10"
+              variants={staggerFast}
+              initial="hidden"
+              animate={inView ? "visible" : "hidden"}
+            >
               {[
                 { n: "30 000+", l: "séances" },
                 { n: "2 000+", l: "membres" },
                 { n: "5 / 5", l: "Google" },
               ].map((s, i) => (
-                <div key={i} className="bg-secondary rounded-xl p-4 text-center border border-border">
+                <motion.div key={i} variants={fadeUp} className="bg-secondary rounded-xl p-4 text-center border border-border">
                   <p className="font-heading text-2xl font-bold text-brand">{s.n}</p>
                   <p className="text-muted-foreground text-xs mt-1">{s.l}</p>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
-            <div className="space-y-4">
+            <motion.div
+              ref={rolesRef}
+              className="space-y-4"
+              variants={staggerFast}
+              initial="hidden"
+              animate={rolesInView ? "visible" : "hidden"}
+            >
               {roles.map((r, i) => {
                 const Icon = r.icon;
                 return (
-                  <div key={i} className="flex gap-5 p-5 bg-secondary rounded-xl border border-border hover:border-brand/30 transition-colors">
+                  <motion.div
+                    key={i}
+                    variants={fadeUp}
+                    className="flex gap-5 p-5 bg-secondary rounded-xl border border-border hover:border-brand/30 hover:shadow-md transition-all duration-300"
+                  >
                     <div className="w-10 h-10 bg-brand/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
                       <Icon className="w-5 h-5 text-brand" strokeWidth={1.5} />
                     </div>
@@ -115,11 +149,11 @@ const AboutSection = () => {
                       <p className="text-brand text-xs font-bold uppercase tracking-widest mb-1">{r.label}</p>
                       <p className="text-muted-foreground text-sm leading-relaxed">{r.text}</p>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
         </div>
       </div>

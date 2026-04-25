@@ -1,4 +1,7 @@
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { CheckCircle2, Shield, Zap, Heart, Dumbbell, Brain, Leaf } from "lucide-react";
+import { fadeUp, slideLeft, slideRight, staggerContainer, staggerFast } from "@/lib/motionVariants";
 
 const included = [
   { icon: Dumbbell, label: "Coaching sportif", sub: "Sessions sur mesure" },
@@ -10,23 +13,47 @@ const included = [
 ];
 
 const GuaranteeSection = () => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.1 });
+
+  const itemsRef = useRef(null);
+  const itemsInView = useInView(itemsRef, { once: true, amount: 0.1 });
+
+  const cardRef = useRef(null);
+  const cardInView = useInView(cardRef, { once: true, amount: 0.2 });
+
   return (
     <section className="py-32 bg-secondary overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* Left — included */}
-          <div>
+          <motion.div
+            ref={ref}
+            variants={slideLeft}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+          >
             <p className="text-brand text-sm font-medium uppercase tracking-widest mb-4">Ce que vous obtenez</p>
             <h2 className="font-heading text-4xl md:text-5xl font-bold mb-10 leading-tight">
               Tout ce qu'il faut.<br />
               <span className="text-muted-foreground/50">Rien de superflu.</span>
             </h2>
-            <div className="grid grid-cols-2 gap-4">
+            <motion.div
+              ref={itemsRef}
+              className="grid grid-cols-2 gap-4"
+              variants={staggerFast}
+              initial="hidden"
+              animate={itemsInView ? "visible" : "hidden"}
+            >
               {included.map((item, i) => {
                 const Icon = item.icon;
                 return (
-                  <div key={i} className="flex items-center gap-4 bg-background rounded-xl p-5 border border-border hover:border-brand/30 transition-colors">
+                  <motion.div
+                    key={i}
+                    variants={fadeUp}
+                    className="flex items-center gap-4 bg-background rounded-xl p-5 border border-border hover:border-brand/30 hover:shadow-md transition-all duration-300"
+                  >
                     <div className="w-10 h-10 bg-brand/10 rounded-lg flex items-center justify-center shrink-0">
                       <Icon className="w-5 h-5 text-brand" strokeWidth={1.5} />
                     </div>
@@ -34,17 +61,22 @@ const GuaranteeSection = () => {
                       <p className="font-semibold text-sm text-foreground leading-tight">{item.label}</p>
                       <p className="text-muted-foreground text-xs mt-0.5">{item.sub}</p>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Right — guarantee visual */}
-          <div className="relative">
+          <motion.div
+            ref={cardRef}
+            className="relative"
+            variants={slideRight}
+            initial="hidden"
+            animate={cardInView ? "visible" : "hidden"}
+          >
             {/* Main guarantee card */}
             <div className="bg-foreground rounded-3xl p-10 relative overflow-hidden">
-              {/* Decorative circles */}
               <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-brand/10" />
               <div className="absolute -bottom-10 -left-10 w-32 h-32 rounded-full bg-brand/5" />
 
@@ -59,25 +91,29 @@ const GuaranteeSection = () => {
                   Nous garantissons aux parents épuisés d'obtenir <span className="text-brand font-semibold">100% d'énergie</span> pour eux-mêmes et leurs proches — sans perdre leur temps seul, ni leur motivation.
                 </p>
 
-                {/* Guarantee points */}
-                <div className="space-y-3 mb-8">
+                <motion.div
+                  className="space-y-3 mb-8"
+                  variants={staggerContainer}
+                  initial="hidden"
+                  animate={cardInView ? "visible" : "hidden"}
+                >
                   {[
                     "Parcours 100% adapté à votre réalité",
                     "Résultats dès les premières semaines",
                     "Si ça ne marche pas, on continue",
                   ].map((point, i) => (
-                    <div key={i} className="flex items-center gap-3">
+                    <motion.div key={i} variants={fadeUp} className="flex items-center gap-3">
                       <div className="w-5 h-5 rounded-full bg-brand/20 flex items-center justify-center shrink-0">
                         <CheckCircle2 className="w-3 h-3 text-brand" />
                       </div>
                       <p className="text-background/70 text-sm">{point}</p>
-                    </div>
+                    </motion.div>
                   ))}
-                </div>
+                </motion.div>
 
                 <a
                   href="#contact"
-                  className="inline-flex items-center gap-2 bg-brand text-white font-semibold px-7 py-3.5 rounded-xl text-sm hover:bg-brand/90 transition-colors"
+                  className="inline-flex items-center gap-2 bg-brand text-white font-semibold px-7 py-3.5 rounded-xl text-sm hover:bg-brand/90 active:scale-[0.98] transition-all hover:scale-105"
                 >
                   Je commence maintenant
                 </a>
@@ -89,7 +125,7 @@ const GuaranteeSection = () => {
               <p className="font-heading text-sm font-bold">Entretien gratuit</p>
               <p className="text-white/70 text-xs">30 min · sans engagement</p>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>

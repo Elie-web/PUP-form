@@ -1,7 +1,10 @@
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Dumbbell, Leaf, Brain, ArrowRight } from "lucide-react";
 import heroImg from "@/assets/hero.png";
 import nutritionImg from "@/assets/nutrition.png";
 import coachMentaleImg from "@/assets/coach mentale.png";
+import { fadeUp, staggerContainer, staggerFast } from "@/lib/motionVariants";
 
 const services = [
   {
@@ -31,34 +34,57 @@ const services = [
 ];
 
 const ServicesSection = () => {
+  const headerRef = useRef(null);
+  const headerInView = useInView(headerRef, { once: true, amount: 0.3 });
+
+  const cardsRef = useRef(null);
+  const cardsInView = useInView(cardsRef, { once: true, amount: 0.1 });
+
   return (
     <section id="services" className="py-32 bg-secondary overflow-hidden">
       <div className="container mx-auto px-6">
 
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end gap-6 mb-16">
-          <div className="flex-1">
+        <motion.div
+          ref={headerRef}
+          className="flex flex-col md:flex-row md:items-end gap-6 mb-16"
+          variants={staggerFast}
+          initial="hidden"
+          animate={headerInView ? "visible" : "hidden"}
+        >
+          <motion.div variants={fadeUp} className="flex-1">
             <p className="text-brand text-sm font-medium uppercase tracking-widest mb-3">Les trois piliers</p>
             <h2 className="font-heading text-4xl md:text-5xl font-bold leading-tight">
               Corps, nutrition, mental.
               <br />
               <span className="text-muted-foreground/50">Un seul résultat : vous retrouver.</span>
             </h2>
-          </div>
-          <a
+          </motion.div>
+          <motion.a
+            variants={fadeUp}
             href="#contact"
             className="shrink-0 inline-flex items-center gap-2 text-sm font-medium text-brand hover:underline"
           >
             Voir le programme complet <ArrowRight className="w-4 h-4" />
-          </a>
-        </div>
+          </motion.a>
+        </motion.div>
 
         {/* Service cards */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <motion.div
+          ref={cardsRef}
+          className="grid md:grid-cols-3 gap-6"
+          variants={staggerContainer}
+          initial="hidden"
+          animate={cardsInView ? "visible" : "hidden"}
+        >
           {services.map((service, i) => {
             const Icon = service.icon;
             return (
-              <div key={i} className="group bg-background rounded-2xl overflow-hidden border border-border hover:border-brand/30 transition-all hover:shadow-lg">
+              <motion.div
+                key={i}
+                variants={fadeUp}
+                className="group bg-background rounded-2xl overflow-hidden border border-border hover:border-brand/30 hover:shadow-xl transition-all duration-300"
+              >
                 {/* Image with overlay */}
                 <div className="relative h-56 overflow-hidden">
                   <img
@@ -86,10 +112,10 @@ const ServicesSection = () => {
                   <p className="text-brand text-xs font-medium uppercase tracking-wider mb-3">{service.sub}</p>
                   <p className="text-muted-foreground text-sm leading-relaxed">{service.description}</p>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
       </div>
     </section>

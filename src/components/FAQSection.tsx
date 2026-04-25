@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
+import { fadeUp, slideLeft, slideRight, staggerFast } from "@/lib/motionVariants";
 
 const faqs = [
   {
@@ -27,11 +29,25 @@ const faqs = [
 const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
+  const leftRef = useRef(null);
+  const leftInView = useInView(leftRef, { once: true, amount: 0.2 });
+
+  const rightRef = useRef(null);
+  const rightInView = useInView(rightRef, { once: true, amount: 0.1 });
+
   return (
     <section className="py-32">
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-16 items-start">
-          <div className="sticky top-28">
+
+          {/* Sticky left column */}
+          <motion.div
+            ref={leftRef}
+            className="sticky top-28"
+            variants={slideLeft}
+            initial="hidden"
+            animate={leftInView ? "visible" : "hidden"}
+          >
             <p className="text-brand text-sm font-medium uppercase tracking-widest mb-4">FAQ</p>
             <h2 className="font-heading text-4xl md:text-5xl font-bold mb-6">
               Questions fréquentes
@@ -41,37 +57,66 @@ const FAQSection = () => {
             </p>
             <a
               href="tel:0682311224"
-              className="inline-block bg-brand text-white font-medium px-7 py-3.5 rounded-xl text-sm hover:bg-brand/90 transition-colors"
+              className="inline-block bg-brand text-white font-medium px-7 py-3.5 rounded-xl text-sm hover:bg-brand/90 active:scale-[0.98] transition-all hover:scale-105"
             >
               Poser ma question
             </a>
-          </div>
-          <div className="space-y-4">
+          </motion.div>
+
+          {/* FAQ items */}
+          <motion.div
+            ref={rightRef}
+            className="space-y-4"
+            variants={staggerFast}
+            initial="hidden"
+            animate={rightInView ? "visible" : "hidden"}
+          >
             {faqs.map((faq, i) => (
-              <div
+              <motion.div
                 key={i}
-                className={`rounded-2xl border border-border overflow-hidden transition-colors ${openIndex === i ? "bg-secondary" : "bg-background hover:bg-secondary/60"}`}
+                variants={slideRight}
+                className={`rounded-2xl border border-border overflow-hidden transition-colors duration-200 ${
+                  openIndex === i ? "bg-secondary" : "bg-background hover:bg-secondary/60"
+                }`}
               >
                 <button
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}
                   className="w-full text-left px-7 py-6 flex items-center justify-between gap-4"
+                  aria-expanded={openIndex === i}
                 >
                   <span className="text-foreground font-medium text-base">{faq.q}</span>
-                  <div className="w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center shrink-0">
+                  <motion.div
+                    animate={{ rotate: openIndex === i ? 180 : 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center shrink-0"
+                  >
                     {openIndex === i
                       ? <Minus className="w-4 h-4 text-brand" />
                       : <Plus className="w-4 h-4 text-brand" />
                     }
-                  </div>
+                  </motion.div>
                 </button>
-                {openIndex === i && (
-                  <div className="px-7 pb-6">
-                    <p className="text-muted-foreground text-sm leading-relaxed">{faq.a}</p>
-                  </div>
-                )}
-              </div>
+
+                <AnimatePresence initial={false}>
+                  {openIndex === i && (
+                    <motion.div
+                      key="content"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
+                      style={{ overflow: "hidden" }}
+                    >
+                      <div className="px-7 pb-6">
+                        <p className="text-muted-foreground text-sm leading-relaxed">{faq.a}</p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
+
         </div>
       </div>
     </section>

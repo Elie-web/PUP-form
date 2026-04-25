@@ -1,4 +1,7 @@
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Star, Quote } from "lucide-react";
+import { fadeUp, staggerContainer, staggerFast } from "@/lib/motionVariants";
 
 const testimonials = [
   {
@@ -25,17 +28,35 @@ const testimonials = [
 ];
 
 const TestimonialsSection = () => {
+  const headerRef = useRef(null);
+  const headerInView = useInView(headerRef, { once: true, amount: 0.3 });
+
+  const cardsRef = useRef(null);
+  const cardsInView = useInView(cardsRef, { once: true, amount: 0.1 });
+
+  const ctaRef = useRef(null);
+  const ctaInView = useInView(ctaRef, { once: true, amount: 0.5 });
+
   return (
     <section className="py-32 overflow-hidden">
       <div className="container mx-auto px-6">
 
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
-          <div>
+        <motion.div
+          ref={headerRef}
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16"
+          variants={staggerFast}
+          initial="hidden"
+          animate={headerInView ? "visible" : "hidden"}
+        >
+          <motion.div variants={fadeUp}>
             <p className="text-brand text-sm font-medium uppercase tracking-widest mb-3">Témoignages</p>
             <h2 className="font-heading text-4xl md:text-5xl font-bold">Ils ont retrouvé leur élan</h2>
-          </div>
-          <div className="inline-flex items-center gap-3 bg-secondary border border-border rounded-2xl px-5 py-3 shrink-0">
+          </motion.div>
+          <motion.div
+            variants={fadeUp}
+            className="inline-flex items-center gap-3 bg-secondary border border-border rounded-2xl px-5 py-3 shrink-0"
+          >
             <div className="flex gap-0.5">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="w-4 h-4 fill-brand text-brand" />
@@ -45,25 +66,31 @@ const TestimonialsSection = () => {
               <p className="font-semibold text-sm">5.0 / 5</p>
               <p className="text-muted-foreground text-xs">53 avis Google vérifiés</p>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <motion.div
+          ref={cardsRef}
+          className="grid md:grid-cols-3 gap-6"
+          variants={staggerContainer}
+          initial="hidden"
+          animate={cardsInView ? "visible" : "hidden"}
+        >
           {testimonials.map((t, i) => (
-            <div
+            <motion.div
               key={i}
-              className={`bg-gradient-to-b ${t.gradient} rounded-2xl p-8 border border-border flex flex-col justify-between gap-8 hover:border-brand/30 transition-colors`}
+              variants={fadeUp}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
+              className={`bg-gradient-to-b ${t.gradient} rounded-2xl p-8 border border-border flex flex-col justify-between gap-8 hover:border-brand/30 hover:shadow-lg transition-all duration-300`}
             >
               <div>
-                {/* Tag + quote icon */}
                 <div className="flex items-center justify-between mb-6">
                   <span className="text-brand text-xs font-medium uppercase tracking-widest bg-brand/10 px-3 py-1 rounded-full">
                     {t.tag}
                   </span>
                   <Quote className="w-6 h-6 text-brand/30" />
                 </div>
-                {/* Stars */}
                 <div className="flex gap-0.5 mb-4">
                   {[...Array(5)].map((_, j) => (
                     <Star key={j} className="w-3.5 h-3.5 fill-brand text-brand" />
@@ -71,7 +98,6 @@ const TestimonialsSection = () => {
                 </div>
                 <p className="text-foreground text-base leading-relaxed">{t.text}</p>
               </div>
-              {/* Author */}
               <div className="flex items-center gap-3 pt-5 border-t border-border">
                 <div className="w-10 h-10 rounded-full bg-brand flex items-center justify-center shrink-0">
                   <span className="text-white text-sm font-bold">{t.initial}</span>
@@ -81,22 +107,28 @@ const TestimonialsSection = () => {
                   <p className="text-muted-foreground text-xs">Client(e) PUP Form</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Bottom CTA strip */}
-        <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 bg-secondary rounded-2xl border border-border">
+        <motion.div
+          ref={ctaRef}
+          variants={fadeUp}
+          initial="hidden"
+          animate={ctaInView ? "visible" : "hidden"}
+          className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 bg-secondary rounded-2xl border border-border"
+        >
           <p className="text-foreground font-medium text-sm text-center sm:text-left">
             Rejoignez les 2 000+ parents qui ont retrouvé leur énergie avec PUP Form.
           </p>
           <a
             href="#contact"
-            className="shrink-0 bg-brand text-white font-semibold px-6 py-3 rounded-xl text-sm hover:bg-brand/90 transition-colors"
+            className="shrink-0 bg-brand text-white font-semibold px-6 py-3 rounded-xl text-sm hover:bg-brand/90 active:scale-[0.98] transition-all hover:scale-105"
           >
             Commencer maintenant
           </a>
-        </div>
+        </motion.div>
 
       </div>
     </section>
